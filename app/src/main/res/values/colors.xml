@@ -10,4 +10,5 @@
 
     <color name="lightGray">#E9ECEF</color>
     <color name="darkGray">#ADB5BD</color>
+    <color name="textBlack">#2B2D42</color>
 </resources>

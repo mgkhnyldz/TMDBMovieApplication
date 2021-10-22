@@ -13,14 +13,21 @@
         android:src="@drawable/search_icon" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/_215sdp"
         android:layout_height="@dimen/_24sdp"
         android:layout_gravity="center"
         android:layout_marginStart="@dimen/_18sdp"
-        android:layout_marginEnd="@dimen/_6sdp"
         android:hint="@string/search"
         android:background="@null"
         android:textColorHint="@color/darkGray"
         android:gravity="center|start"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="@dimen/_18sdp"
+        android:layout_height="@dimen/_18sdp"
+        android:layout_gravity="center"
+        android:src="@drawable/close_icon"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:visibility="gone"/>
     
 </androidx.appcompat.widget.LinearLayoutCompat>
