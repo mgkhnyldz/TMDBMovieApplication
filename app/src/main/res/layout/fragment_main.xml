@@ -9,9 +9,8 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.MainFragment">
 
-        <include
-            android:id="@+id/includeSearchView"
-            layout="@layout/layout_search_view"
+        <FrameLayout
+            android:id="@+id/frameSearchView"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_48sdp"
             android:layout_marginStart="@dimen/_9sdp"
@@ -19,27 +18,64 @@
             android:layout_marginEnd="@dimen/_9sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_48sdp"
+                android:background="@color/lightGray"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_18sdp"
+                    android:src="@drawable/search_icon" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="@dimen/_215sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_18sdp"
+                    android:text="@string/search"
+                    android:background="@null"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/darkGray"
+                    android:gravity="center|start"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/close_icon"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:visibility="gone"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </FrameLayout>
+
 
         <com.example.mobilliumcase.util.CustomViewPager
             android:id="@+id/vpMovie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/includeSearchView" />
+            app:layout_constraintTop_toBottomOf="@id/frameSearchView" />
 
         <com.rd.PageIndicatorView
             android:id="@+id/pageIndicatorView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_marginBottom="@dimen/_16sdp"
             app:layout_constraintBottom_toBottomOf="@id/vpMovie"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:piv_animationType="scale"
+            app:piv_animationType="worm"
             app:piv_dynamicCount="true"
             app:piv_interactiveAnimation="true"
             app:piv_selectedColor="@color/white"
@@ -52,12 +88,13 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMovieList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="@dimen/_16sdp"
             android:nestedScrollingEnabled="false"
             android:paddingStart="@dimen/_12sdp"
             android:paddingEnd="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/pageIndicatorView" />
 

@@ -18,6 +18,7 @@
         android:layout_gravity="center"
         android:layout_marginStart="@dimen/_18sdp"
         android:hint="@string/search"
+        android:textSize="@dimen/_12sdp"
         android:background="@null"
         android:textColorHint="@color/darkGray"
         android:gravity="center|start"/>

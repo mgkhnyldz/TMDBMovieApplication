@@ -1,42 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    android:layout_width="match_parent"
-    android:layout_marginEnd="2dp"
-    android:layout_height="match_parent"
-    app:cardCornerRadius="2dp"
-    app:cardElevation="8dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout>
 
-    <ImageView
+    <data>
+
+        <variable
+            name="movie"
+            type="com.example.mobilliumcase.data.model.MovieResult" />
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:id="@+id/slide_item_image_view" />
+        android:layout_marginEnd="2dp"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="8dp">
 
-    <TextView
-        android:id="@+id/tvSlideItemContentName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Film Adı"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_gravity="start|bottom"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="36dp"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/slide_item_image_view"
+            movieBackground="@{movie.backdrop_path}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter" />
 
-    <TextView
-        android:id="@+id/tvSlideItemContentDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hemen İzle"
-        android:textSize="14sp"
-        android:textStyle="normal"
-        android:layout_gravity="start|bottom"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSlideItemContentName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|bottom"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_68sdp"
+            android:text="@{movie.title}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold" />
 
-</androidx.cardview.widget.CardView>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSlideItemContentDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|bottom"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{movie.overview}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="normal" />
+
+    </androidx.cardview.widget.CardView>
+</layout>
+
 

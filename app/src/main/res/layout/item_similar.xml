@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivMoviePicture"
+            android:id="@+id/ivMoviePoster"
             android:layout_width="@dimen/_104sdp"
             android:layout_height="@dimen/_104sdp"
             android:adjustViewBounds="true"

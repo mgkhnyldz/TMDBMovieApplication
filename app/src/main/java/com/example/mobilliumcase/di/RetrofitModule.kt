@@ -36,7 +36,6 @@ class RetrofitModule {
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-            .connectTimeout(connectionTimeout.toLong(), TimeUnit.MILLISECONDS)
             .addInterceptor { chain ->
                 val original = chain.request()
                 val originalHttpUrl = original.url
@@ -51,6 +50,10 @@ class RetrofitModule {
             .addInterceptor(HttpLoggingInterceptor().also {
                 it.level = setLogLevel()
             })
+            .followRedirects(true)
+            .readTimeout(timeout = 60, TimeUnit.SECONDS)
+            .connectTimeout(timeout = 60, TimeUnit.SECONDS)
+            .writeTimeout(timeout = 60, TimeUnit.SECONDS)
             .build()
     }
 

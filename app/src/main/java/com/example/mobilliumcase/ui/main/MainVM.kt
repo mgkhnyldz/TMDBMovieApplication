@@ -1,9 +1,6 @@
 package com.example.mobilliumcase.ui.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.mobilliumcase.data.model.Content
 import com.example.mobilliumcase.data.resource.Resource
 import com.example.mobilliumcase.repository.TmdbRepository
@@ -27,4 +24,7 @@ class MainVM @Inject constructor(
             }
         }
     }
+
+    fun getUpcomingMovies(): LiveData<Resource<Content>> =
+        tmdbRepository.getUpcomingMovies().asLiveData()
 }
