@@ -17,14 +17,14 @@ class MainVM @Inject constructor(
     val movieList: LiveData<Resource<Content>>
         get() = _movieList
 
-    fun getNowPlayingMovies() {
+    fun getNowPlayingMovies(map: Map<String, String>) {
         viewModelScope.launch {
-            tmdbRepository.getNowPlayingMovies().collect {
+            tmdbRepository.getNowPlayingMovies(map).collect {
                 _movieList.postValue(it)
             }
         }
     }
 
-    fun getUpcomingMovies(): LiveData<Resource<Content>> =
-        tmdbRepository.getUpcomingMovies().asLiveData()
+    fun getUpcomingMovies(map: Map<String, String>): LiveData<Resource<Content>> =
+        tmdbRepository.getUpcomingMovies(map).asLiveData()
 }

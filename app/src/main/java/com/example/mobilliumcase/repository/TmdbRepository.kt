@@ -16,20 +16,24 @@ class TmdbRepository @Inject constructor(
     private val api: MobilliumApi
 ) {
 
-    fun getNowPlayingMovies(): Flow<Resource<Content>> {
+    fun getNowPlayingMovies(map: Map<String, String>): Flow<Resource<Content>> {
         return flow {
             emit(Resource.loading(null))
-            val nowPlayingMovies = api.getNowPlayingMovies()
+            val nowPlayingMovies = api.getNowPlayingMovies(
+                queryMap = map
+            )
             emit(Resource.success(nowPlayingMovies))
         }.catch {
             emit(Resource.error(it.message, null, it))
         }.flowOn(Dispatchers.IO)
     }
 
-    fun getUpcomingMovies(): Flow<Resource<Content>> {
+    fun getUpcomingMovies(map: Map<String, String>): Flow<Resource<Content>> {
         return flow {
             emit(Resource.loading(null))
-            val upComingMovies = api.getUpcomingMovies()
+            val upComingMovies = api.getUpcomingMovies(
+                queryMap = map
+            )
             emit(Resource.success(upComingMovies))
         }.catch {
             emit(Resource.error(it.message, null, it))

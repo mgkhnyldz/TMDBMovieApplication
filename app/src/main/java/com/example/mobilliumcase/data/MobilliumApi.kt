@@ -7,11 +7,11 @@ import retrofit2.http.QueryMap
 
 interface MobilliumApi {
     @GET("movie/now_playing")
-    suspend fun getNowPlayingMovies(): Content
+    suspend fun getNowPlayingMovies(@QueryMap queryMap: Map<String, String>): Content
 
 
     @GET(" movie/upcoming")
-    suspend fun getUpcomingMovies(): Content
+    suspend fun getUpcomingMovies(@QueryMap queryMap: Map<String, String>): Content
 
     @GET("search/movie")
     suspend fun getSearchResultMovies(@QueryMap queryMap: Map<String, String>): MovieQuery

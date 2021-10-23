@@ -9,6 +9,7 @@ import com.example.mobilliumcase.R
 import com.example.mobilliumcase.data.resource.Status
 import com.example.mobilliumcase.databinding.FragmentMainBinding
 import com.example.mobilliumcase.extension.navigateSafe
+import com.example.mobilliumcase.helper.movieQueryMap
 import com.example.mobilliumcase.ui.main.adapter.MovieAdapter
 import com.example.mobilliumcase.ui.main.adapter.SliderAdapter
 import com.github.ajalt.timberkt.e
@@ -28,7 +29,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mainVM.getNowPlayingMovies()
+        mainVM.getNowPlayingMovies(
+            map = movieQueryMap(
+                page = 1
+            )
+        )
         mainVM.movieList.observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
@@ -40,7 +45,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
             }
         })
 
-        mainVM.getUpcomingMovies().observe(viewLifecycleOwner, {
+        mainVM.getUpcomingMovies(
+            map = movieQueryMap(
+                page = 1
+            )
+        ).observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
                     movieAdapter = MovieAdapter(it.data!!.results)
