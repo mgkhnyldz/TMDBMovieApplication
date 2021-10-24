@@ -10,6 +10,7 @@
 
     <color name="lightGray">#E9ECEF</color>
     <color name="darkGray">#ADB5BD</color>
+    <color name="textGray">#8D99AE</color>
     <color name="textBlack">#2B2D42</color>
     <color name="dotYellow">#E6B91E</color>
 </resources>

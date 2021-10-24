@@ -5,7 +5,6 @@ import com.example.mobilliumcase.data.model.Content
 import com.example.mobilliumcase.data.model.MovieDetail
 import com.example.mobilliumcase.data.model.MovieQuery
 import com.example.mobilliumcase.data.resource.Resource
-import com.github.ajalt.timberkt.i
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -32,11 +31,10 @@ class TmdbRepository @Inject constructor(
     fun getUpcomingMovies(map: Map<String, String>): Flow<Resource<Content>> {
         return flow {
             emit(Resource.loading(null))
-            kotlinx.coroutines.delay(2000)
-            i { "requestUpcoming" }
             val upComingMovies = api.getUpcomingMovies(
                 queryMap = map
             )
+            kotlinx.coroutines.delay(1000)
             emit(Resource.success(upComingMovies))
         }.catch {
             emit(Resource.error(it.message, null, it))

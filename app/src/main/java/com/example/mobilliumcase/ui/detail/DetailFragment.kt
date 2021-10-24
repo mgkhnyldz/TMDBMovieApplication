@@ -1,11 +1,9 @@
 package com.example.mobilliumcase.ui.detail
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.navGraphViewModels
@@ -19,7 +17,6 @@ import com.example.mobilliumcase.extension.hide
 import com.example.mobilliumcase.extension.navigateSafe
 import com.example.mobilliumcase.extension.show
 import com.example.mobilliumcase.listener.OnItemMovieClickListener
-import com.example.mobilliumcase.ui.main.adapter.MovieAdapter
 import com.github.ajalt.timberkt.e
 import com.github.ajalt.timberkt.i
 import dagger.hilt.android.AndroidEntryPoint

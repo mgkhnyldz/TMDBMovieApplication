@@ -98,6 +98,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main),
                 page = page
             )
         )
+
         mainVM.movies.observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
@@ -168,7 +169,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main),
         binding.mainNestedScroll.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             val view = (v as NestedScrollView).getChildAt(v.childCount - 1)
             val diff = view.bottom - (v.height + scrollY)
-            i { "diff -> $diff" }
             if (diff < 10 && !loading) {
                 page += 1
                 mainVM.getUpcomingMovies(

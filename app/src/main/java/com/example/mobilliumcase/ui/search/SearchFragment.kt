@@ -22,6 +22,7 @@ import com.example.mobilliumcase.helper.searchQueryMap
 import com.example.mobilliumcase.listener.OnItemMovieClickListener
 import com.example.mobilliumcase.ui.search.adapter.SearchAdapter
 import com.github.ajalt.timberkt.e
+import com.github.ajalt.timberkt.i
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -48,6 +49,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 }
             }
         })
+
+        binding.ivCloseIcon.setOnClickListener {
+            binding.etSearch.setText("")
+        }
     }
 
     private fun closeKeyboard() {
@@ -62,7 +67,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
             } else {
                 binding.ivCloseIcon.hide()
             }
-
             if (count > 2) {
                 searchVM.getSearchResultMovies(
                     map = searchQueryMap(
