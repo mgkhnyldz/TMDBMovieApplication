@@ -13,7 +13,9 @@ import com.example.mobilliumcase.bundle.BundleKeys
 import com.example.mobilliumcase.data.model.MovieResult
 import com.example.mobilliumcase.data.resource.Status
 import com.example.mobilliumcase.databinding.FragmentDetailBinding
+import com.example.mobilliumcase.extension.hide
 import com.example.mobilliumcase.extension.navigateSafe
+import com.example.mobilliumcase.extension.show
 import com.example.mobilliumcase.listener.OnItemMovieClickListener
 import com.example.mobilliumcase.ui.main.adapter.MovieAdapter
 import com.github.ajalt.timberkt.e
@@ -60,9 +62,12 @@ class DetailFragment : DialogFragment(), OnItemMovieClickListener {
             when (it.status) {
                 Status.SUCCESS -> {
                     binding.movie = it.data!!
+                    setVisibility(false)
                 }
                 Status.ERROR -> e(it.throwable)
-                Status.LOADING -> i { "Loading" }
+                Status.LOADING -> {
+                    setVisibility(true)
+                }
             }
         })
 
@@ -74,8 +79,23 @@ class DetailFragment : DialogFragment(), OnItemMovieClickListener {
                 }
                 Status.ERROR -> e(it.throwable)
                 Status.LOADING -> i { "Loading" }
+
             }
         })
+    }
+
+    private fun setVisibility(isLoading: Boolean) {
+        if (isLoading) {
+            binding.apply {
+                detailNestedScroll.hide()
+                flDetailProgress.show()
+            }
+        } else {
+            binding.apply {
+                detailNestedScroll.show()
+                flDetailProgress.hide()
+            }
+        }
     }
 
     private fun initUI() {

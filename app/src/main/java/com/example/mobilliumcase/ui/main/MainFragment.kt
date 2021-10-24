@@ -1,7 +1,6 @@
 package com.example.mobilliumcase.ui.main
 
 import android.os.Bundle
-import android.view.MotionEvent
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.navigation.navGraphViewModels
@@ -13,7 +12,9 @@ import com.example.mobilliumcase.bundle.BundleKeys
 import com.example.mobilliumcase.data.model.MovieResult
 import com.example.mobilliumcase.data.resource.Status
 import com.example.mobilliumcase.databinding.FragmentMainBinding
+import com.example.mobilliumcase.extension.hide
 import com.example.mobilliumcase.extension.navigateSafe
+import com.example.mobilliumcase.extension.show
 import com.example.mobilliumcase.helper.movieQueryMap
 import com.example.mobilliumcase.listener.OnItemMovieClickListener
 import com.example.mobilliumcase.ui.main.adapter.MovieAdapter
@@ -48,6 +49,26 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
 
     }
 
+    private fun setVisibility(isLoading: Boolean) {
+        if (isLoading) {
+            binding.apply {
+                frameSearchView.hide()
+                vpMovie.hide()
+                pageIndicatorView.hide()
+                rvMovieList.hide()
+                mainProgressBar.show()
+            }
+        } else {
+            binding.apply {
+                frameSearchView.show()
+                vpMovie.show()
+                pageIndicatorView.show()
+                rvMovieList.show()
+                mainProgressBar.hide()
+            }
+        }
+    }
+
     private fun initUI() {
         binding.rvMovieList.layoutManager = LinearLayoutManager(
             requireContext(),
@@ -55,6 +76,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
             false
         )
         binding.rvMovieList.setHasFixedSize(true)
+        binding.rvMovieList.isNestedScrollingEnabled = false
     }
 
     private fun setObservables() {
@@ -67,6 +89,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
             when (it.status) {
                 Status.SUCCESS -> {
                     loading = false
+                    setVisibility(loading)
                     val state = binding.rvMovieList.layoutManager!!.onSaveInstanceState()
                     if (page > 1 && this::movieAdapter.isInitialized) {
                         movieAdapter.updateList(it.data!!.results)
@@ -77,7 +100,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
                     (binding.rvMovieList.layoutManager as LinearLayoutManager).onRestoreInstanceState(state)
                 }
                 Status.ERROR -> e(it.throwable)
-                Status.LOADING -> loading = true
+                Status.LOADING -> {
+                    loading = true
+                    setVisibility(loading)
+                }
             }
 
 
@@ -117,6 +143,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
                             )
                         )
                         loading = true
+                        binding.mainProgressBar.show()
                     }
                 }
             }
