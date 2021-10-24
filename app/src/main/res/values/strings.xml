@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">MobilliumCase</string>
+    <string name="app_name">Mobillium</string>
+    <string name="search">Search</string>
+    <string name="similar_content">Benzer İçerikler</string>
 </resources>
