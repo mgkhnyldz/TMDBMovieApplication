@@ -6,6 +6,7 @@ import androidx.core.os.bundleOf
 import androidx.core.widget.NestedScrollView
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.mobilliumcase.BaseFragment
 import com.example.mobilliumcase.R
 import com.example.mobilliumcase.bundle.BundleKeys
@@ -25,7 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main),
-    OnItemMovieClickListener {
+    OnItemMovieClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private val mainVM: MainVM by navGraphViewModels(R.id.nav_graph) {
         defaultViewModelProviderFactory
@@ -87,6 +88,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main),
         )
         binding.rvMovieList.setHasFixedSize(true)
         binding.rvMovieList.isNestedScrollingEnabled = false
+
+        binding.mainSwipe.setOnRefreshListener(this)
     }
 
     private fun setObservables() {
@@ -183,5 +186,14 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main),
             R.id.action_mainFragment_to_detailFragment,
             bundleOf(BundleKeys.MOVIE to movie)
         )
+    }
+
+    override fun onRefresh() {
+        mainVM.getUpcomingMovies(
+            map = movieQueryMap(
+                page = 1
+            )
+        )
+        binding.mainSwipe.isRefreshing = false
     }
 }
