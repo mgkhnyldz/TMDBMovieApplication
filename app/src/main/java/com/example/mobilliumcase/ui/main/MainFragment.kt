@@ -99,6 +99,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main),
             )
         )
 
+        mainVM.getNowPlayingMovies(
+            map = movieQueryMap(
+                page = page
+            )
+        )
+
         mainVM.movies.observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
@@ -124,11 +130,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main),
             }
         })
 
-        mainVM.getNowPlayingMovies(
-            map = movieQueryMap(
-                page = 1
-            )
-        ).observe(viewLifecycleOwner, {
+        mainVM.nowPlayingList.observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
                     sliderAdapter =
@@ -194,6 +196,13 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main),
                 page = 1
             )
         )
+
+        mainVM.getNowPlayingMovies(
+            map = movieQueryMap(
+                page = 1
+            )
+        )
+
         binding.mainSwipe.isRefreshing = false
     }
 }
