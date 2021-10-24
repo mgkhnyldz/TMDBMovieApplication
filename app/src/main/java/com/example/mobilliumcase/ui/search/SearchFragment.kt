@@ -9,7 +9,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mobilliumcase.BaseFragment
+import com.example.mobilliumcase.base.BaseFragment
 import com.example.mobilliumcase.R
 import com.example.mobilliumcase.bundle.BundleKeys
 import com.example.mobilliumcase.data.model.MovieResult
@@ -22,7 +22,6 @@ import com.example.mobilliumcase.helper.searchQueryMap
 import com.example.mobilliumcase.listener.OnItemMovieClickListener
 import com.example.mobilliumcase.ui.search.adapter.SearchAdapter
 import com.github.ajalt.timberkt.e
-import com.github.ajalt.timberkt.i
 import dagger.hilt.android.AndroidEntryPoint
 
 

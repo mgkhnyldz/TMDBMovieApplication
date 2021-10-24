@@ -7,7 +7,7 @@ import androidx.core.widget.NestedScrollView
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.mobilliumcase.BaseFragment
+import com.example.mobilliumcase.base.BaseFragment
 import com.example.mobilliumcase.R
 import com.example.mobilliumcase.bundle.BundleKeys
 import com.example.mobilliumcase.data.model.MovieResult
