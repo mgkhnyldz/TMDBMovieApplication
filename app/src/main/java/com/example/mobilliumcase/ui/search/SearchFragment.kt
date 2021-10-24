@@ -32,8 +32,8 @@ import com.github.ajalt.timberkt.e
 import com.github.ajalt.timberkt.i
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.core.content.ContextCompat.getSystemService
-
-
+import com.example.mobilliumcase.extension.hide
+import com.example.mobilliumcase.extension.show
 
 
 @AndroidEntryPoint
@@ -81,15 +81,30 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                                 false
                             )
                             binding.rvSearchList.adapter = searchAdapter
+                            setVisibility(false)
                         }
-                        Status.ERROR -> e(it.throwable)
-                        Status.LOADING -> i { "Loading" }
+                        Status.ERROR -> {
+                            e(it.throwable)
+                            setVisibility(false)
+                        }
+                        Status.LOADING -> {
+                            setVisibility(true)
+                        }
                     }
                 })
             }
         }
     }
 
+    private fun setVisibility(isLoading: Boolean) {
+        if (isLoading) {
+            binding.rvSearchList.hide()
+            binding.searchProgressBar.show()
+        } else {
+            binding.rvSearchList.show()
+            binding.searchProgressBar.hide()
+        }
+    }
 
     private fun focusEt() {
         binding.etSearch.requestFocus()
