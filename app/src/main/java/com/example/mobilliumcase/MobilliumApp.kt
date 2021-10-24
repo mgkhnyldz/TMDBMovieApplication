@@ -9,7 +9,7 @@ class MobilliumApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        if (true) {
+        if (false) {
             Timber.plant(Timber.DebugTree())
         }
     }

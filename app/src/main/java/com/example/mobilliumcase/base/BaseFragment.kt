@@ -1,4 +1,4 @@
-package com.example.mobilliumcase
+package com.example.mobilliumcase.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
