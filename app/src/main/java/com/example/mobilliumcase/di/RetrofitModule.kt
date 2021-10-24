@@ -59,7 +59,7 @@ class RetrofitModule {
 
     @Provides
     @Singleton
-    fun setLogLevel(): HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.NONE
+    fun setLogLevel(): HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.HEADERS
 
 
     @Provides
