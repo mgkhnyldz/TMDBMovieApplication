@@ -6,6 +6,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
+@Parcelize
 data class MovieResult(
     @SerialName("id")
     var workerId: Long? = null,
@@ -17,4 +18,4 @@ data class MovieResult(
     var overview: String = "",
     var vote_average: Double = 0.0,
     var release_date: String = "",
-)
+): Parcelable

@@ -31,6 +31,7 @@ class TmdbRepository @Inject constructor(
     fun getUpcomingMovies(map: Map<String, String>): Flow<Resource<Content>> {
         return flow {
             emit(Resource.loading(null))
+            kotlinx.coroutines.delay(1000)
             val upComingMovies = api.getUpcomingMovies(
                 queryMap = map
             )
