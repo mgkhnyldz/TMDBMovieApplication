@@ -1,9 +1,11 @@
 package com.example.mobilliumcase.ui.detail
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.navGraphViewModels
