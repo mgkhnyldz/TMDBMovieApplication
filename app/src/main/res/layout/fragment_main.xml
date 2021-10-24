@@ -123,6 +123,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ProgressBar
+                android:id="@+id/rvProgressBar"
+                android:layout_width="@dimen/_16sdp"
+                android:layout_height="@dimen/_16sdp"
+                android:visibility="invisible"
+                android:layout_margin="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@id/rvMovieList"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

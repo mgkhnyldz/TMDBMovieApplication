@@ -49,7 +49,21 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         super.onViewCreated(view, savedInstanceState)
 
         focusEt()
+        setObservables()
 
+
+
+        binding.rvSearchList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                    val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+                    imm!!.hideSoftInputFromWindow(view.windowToken, 0)
+                }
+            }
+        })
+    }
+
+    private fun setObservables() {
         binding.etSearch.doOnTextChanged { text, _, _, count ->
             if (count > 2) {
                 searchVM.getSearchResultMovies(
@@ -74,17 +88,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 })
             }
         }
-
-        binding.rvSearchList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
-                    val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-                    imm!!.hideSoftInputFromWindow(view.windowToken, 0)
-                }
-            }
-        })
     }
-
 
 
     private fun focusEt() {

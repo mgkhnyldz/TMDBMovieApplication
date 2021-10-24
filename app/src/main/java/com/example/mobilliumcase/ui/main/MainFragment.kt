@@ -3,9 +3,9 @@ package com.example.mobilliumcase.ui.main
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
+import androidx.core.widget.NestedScrollView
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.mobilliumcase.BaseFragment
 import com.example.mobilliumcase.R
 import com.example.mobilliumcase.bundle.BundleKeys
@@ -24,7 +24,8 @@ import com.github.ajalt.timberkt.i
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), OnItemMovieClickListener {
+class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main),
+    OnItemMovieClickListener {
 
     private val mainVM: MainVM by navGraphViewModels(R.id.nav_graph) {
         defaultViewModelProviderFactory
@@ -50,23 +51,32 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
     }
 
     private fun setVisibility(isLoading: Boolean) {
-        if (isLoading) {
-            binding.apply {
-                frameSearchView.hide()
-                vpMovie.hide()
-                pageIndicatorView.hide()
-                rvMovieList.hide()
-                mainProgressBar.show()
+        if (page == 1) {
+            if (isLoading) {
+                binding.apply {
+                    frameSearchView.hide()
+                    vpMovie.hide()
+                    pageIndicatorView.hide()
+                    rvMovieList.hide()
+                    mainProgressBar.show()
+                }
+            } else {
+                binding.apply {
+                    frameSearchView.show()
+                    vpMovie.show()
+                    pageIndicatorView.show()
+                    rvMovieList.show()
+                    mainProgressBar.hide()
+                }
             }
         } else {
-            binding.apply {
-                frameSearchView.show()
-                vpMovie.show()
-                pageIndicatorView.show()
-                rvMovieList.show()
-                mainProgressBar.hide()
+            if (isLoading) {
+                binding.rvProgressBar.show()
+            } else {
+                binding.rvProgressBar.visibility = View.INVISIBLE
             }
         }
+
     }
 
     private fun initUI() {
@@ -94,10 +104,13 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
                     if (page > 1 && this::movieAdapter.isInitialized) {
                         movieAdapter.updateList(it.data!!.results)
                     } else {
-                        movieAdapter = MovieAdapter(it.data!!.results as ArrayList<MovieResult>, this)
+                        movieAdapter =
+                            MovieAdapter(it.data!!.results as ArrayList<MovieResult>, this)
                         binding.rvMovieList.adapter = movieAdapter
                     }
-                    (binding.rvMovieList.layoutManager as LinearLayoutManager).onRestoreInstanceState(state)
+                    (binding.rvMovieList.layoutManager as LinearLayoutManager).onRestoreInstanceState(
+                        state
+                    )
                 }
                 Status.ERROR -> e(it.throwable)
                 Status.LOADING -> {
@@ -105,8 +118,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
                     setVisibility(loading)
                 }
             }
-
-
         })
 
         mainVM.getNowPlayingMovies(
@@ -116,7 +127,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
         ).observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
-                    sliderAdapter = SliderAdapter(requireContext(), it.data!!.results.subList(0, 5), this)
+                    sliderAdapter =
+                        SliderAdapter(requireContext(), it.data!!.results.subList(0, 5), this)
                     binding.vpMovie.adapter = sliderAdapter
 
                 }
@@ -128,7 +140,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
     }
 
     private fun pagination() {
-        binding.rvMovieList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        /*binding.rvMovieList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if(dy > 1){
                     i { "scrolling" }
@@ -148,14 +160,28 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
                     }
                 }
             }
-        })
+        })*/
 
         binding.mainNestedScroll.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-
+            val view = (v as NestedScrollView).getChildAt(v.childCount - 1)
+            val diff = view.bottom - (v.height + scrollY)
+            i { "diff -> $diff" }
+            if (diff < 10 && !loading) {
+                page += 1
+                mainVM.getUpcomingMovies(
+                    map = movieQueryMap(
+                        page = page
+                    )
+                )
+                loading = true
+            }
         }
     }
 
     override fun onClicked(movie: MovieResult) {
-        navigateSafe(R.id.action_mainFragment_to_detailFragment, bundleOf(BundleKeys.MOVIE to movie))
+        navigateSafe(
+            R.id.action_mainFragment_to_detailFragment,
+            bundleOf(BundleKeys.MOVIE to movie)
+        )
     }
 }
