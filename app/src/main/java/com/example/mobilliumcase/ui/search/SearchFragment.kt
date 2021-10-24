@@ -1,17 +1,22 @@
 package com.example.mobilliumcase.ui.search
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.AbsListView
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.os.bundleOf
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mobilliumcase.BaseFragment
 import com.example.mobilliumcase.R
 import com.example.mobilliumcase.bundle.BundleKeys
@@ -26,6 +31,10 @@ import com.example.mobilliumcase.ui.search.adapter.SearchAdapter
 import com.github.ajalt.timberkt.e
 import com.github.ajalt.timberkt.i
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.core.content.ContextCompat.getSystemService
+
+
+
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_search), OnItemMovieClickListener {
@@ -65,7 +74,18 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 })
             }
         }
+
+        binding.rvSearchList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                    val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+                    imm!!.hideSoftInputFromWindow(view.windowToken, 0)
+                }
+            }
+        })
     }
+
+
 
     private fun focusEt() {
         binding.etSearch.requestFocus()
