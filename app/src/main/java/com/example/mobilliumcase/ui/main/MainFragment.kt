@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobilliumcase.BaseFragment
 import com.example.mobilliumcase.R
+import com.example.mobilliumcase.bundle.BundleKeys
 import com.example.mobilliumcase.data.model.MovieResult
 import com.example.mobilliumcase.data.resource.Status
 import com.example.mobilliumcase.databinding.FragmentMainBinding
@@ -123,6 +124,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
 
     override fun onClicked(movie: MovieResult) {
         i { "movie -> $movie" }
-        navigateSafe(R.id.action_mainFragment_to_detailFragment, bundleOf("movie" to movie))
+        navigateSafe(R.id.action_mainFragment_to_detailFragment, bundleOf(BundleKeys.MOVIE to movie))
     }
 }

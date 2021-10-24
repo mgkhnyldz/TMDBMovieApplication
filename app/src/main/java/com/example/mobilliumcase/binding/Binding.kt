@@ -32,3 +32,11 @@ fun setSearchText(textView: AppCompatTextView, movie: MovieResult) {
         movie.title
     }
 }
+
+@BindingAdapter("releaseDate")
+fun setReleaseDate(textView: AppCompatTextView, text: String) {
+    if (text.isNotEmpty())
+        textView.text = text.replace('-', '.', false)
+    else
+        textView.text = ""
+}

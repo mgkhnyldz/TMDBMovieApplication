@@ -38,8 +38,7 @@ class MovieAdapter(
 
     fun updateList(list: List<MovieResult>) {
         data.addAll(list)
-        i { "datalar -> $data" }
-        notifyDataSetChanged()
+        notifyItemRangeChanged(itemCount, list.size)
     }
 
     interface OnItemClickListener {

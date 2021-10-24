@@ -1,141 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.detail.DetailFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivMovieBackground"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imdb_logo"
-        android:layout_width="@dimen/_48sdp"
-        android:layout_height="@dimen/_24sdp"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:src="@drawable/imdb_logo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivMovieBackground" />
+        <variable
+            name="movie"
+            type="com.example.mobilliumcase.data.model.MovieDetail" />
+    </data>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/rate_icon"
-        android:layout_width="@dimen/_16sdp"
-        android:layout_height="@dimen/_16sdp"
-        android:layout_marginStart="@dimen/_4sdp"
-        android:src="@drawable/rate_icon"
-        app:layout_constraintBottom_toBottomOf="@id/imdb_logo"
-        app:layout_constraintStart_toEndOf="@id/imdb_logo"
-        app:layout_constraintTop_toTopOf="@id/imdb_logo" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvRate"
-        android:layout_width="@dimen/_36sdp"
-        android:layout_height="@dimen/_16sdp"
-        android:layout_marginStart="@dimen/_4sdp"
-        android:text="7.8/10"
-        android:textSize="@dimen/_12sdp"
-        app:layout_constraintBottom_toBottomOf="@id/imdb_logo"
-        app:layout_constraintStart_toEndOf="@id/rate_icon"
-        app:layout_constraintTop_toTopOf="@id/imdb_logo" />
-
-    <View
-        android:id="@+id/circle_view"
-        android:layout_width="@dimen/_4sdp"
-        android:layout_height="@dimen/_4sdp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:background="@drawable/view_dot"
-        app:layout_constraintBottom_toBottomOf="@id/imdb_logo"
-        app:layout_constraintStart_toEndOf="@id/tvRate"
-        app:layout_constraintTop_toTopOf="@id/imdb_logo" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvMovieReleaseDate"
-        android:layout_width="@dimen/_64sdp"
-        android:layout_height="@dimen/_16sdp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:text="15.02.2021"
-        android:textSize="@dimen/_12sdp"
-        app:layout_constraintBottom_toBottomOf="@id/imdb_logo"
-        app:layout_constraintStart_toEndOf="@id/circle_view"
-        app:layout_constraintTop_toTopOf="@id/imdb_logo" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clMovieContent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:paddingStart="@dimen/_16sdp"
-        android:paddingEnd="@dimen/_16sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imdb_logo">
+        android:layout_height="match_parent"
+        tools:context=".ui.detail.DetailFragment">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvMovieName"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivMovieBackground"
+            movieBackground="@{movie.backdropPath}"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_24sdp"
-            android:text="Moviee"
-            android:textColor="@color/textBlack"
-            android:textSize="@dimen/_20sdp"
-            android:textStyle="bold"
+            android:layout_height="@dimen/_196sdp"
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imdb_logo"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:src="@drawable/imdb_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivMovieBackground" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/rate_icon"
+            android:layout_width="@dimen/_16sdp"
+            android:layout_height="@dimen/_16sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:src="@drawable/rate_icon"
+            app:layout_constraintBottom_toBottomOf="@id/imdb_logo"
+            app:layout_constraintStart_toEndOf="@id/imdb_logo"
+            app:layout_constraintTop_toTopOf="@id/imdb_logo" />
+
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvMovieDescription"
+            android:id="@+id/tvRate"
+            android:layout_width="@dimen/_36sdp"
+            android:layout_height="@dimen/_16sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="@{movie.voteAverage + `/10`}"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="@id/imdb_logo"
+            app:layout_constraintStart_toEndOf="@id/rate_icon"
+            app:layout_constraintTop_toTopOf="@id/imdb_logo" />
+
+        <View
+            android:id="@+id/circle_view"
+            android:layout_width="@dimen/_4sdp"
+            android:layout_height="@dimen/_4sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@drawable/view_dot"
+            app:layout_constraintBottom_toBottomOf="@id/imdb_logo"
+            app:layout_constraintStart_toEndOf="@id/tvRate"
+            app:layout_constraintTop_toTopOf="@id/imdb_logo" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvMovieReleaseDate"
+            releaseDate="@{movie.releaseDate ?? ``}"
+            android:layout_width="@dimen/_64sdp"
+            android:layout_height="@dimen/_16sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="@id/imdb_logo"
+            app:layout_constraintStart_toEndOf="@id/circle_view"
+            app:layout_constraintTop_toTopOf="@id/imdb_logo" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clMovieContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_16sdp"
-            android:text="Lorem İpsum"
-            android:textColor="@color/textBlack"
-            android:textSize="@dimen/_15sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:paddingStart="@dimen/_16sdp"
+            android:paddingEnd="@dimen/_16sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvMovieName" />
+            app:layout_constraintTop_toBottomOf="@id/imdb_logo">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvMovieName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_24sdp"
+                android:text="@{movie.title}"
+                android:textColor="@color/textBlack"
+                android:textSize="@dimen/_20sdp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clSimilarContent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_24sdp"
-        android:paddingStart="@dimen/_16sdp"
-        android:paddingEnd="@dimen/_16sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clMovieContent">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvMovieDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:text="@{movie.overview}"
+                android:textColor="@color/textBlack"
+                android:textSize="@dimen/_15sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvMovieName" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvSimilarContent"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_20sdp"
-            android:text="Similar Content"
-            android:textColor="@color/textBlack"
-            android:textSize="@dimen/_15sdp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvSimilarMovieList"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clSimilarContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:nestedScrollingEnabled="false"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:paddingStart="@dimen/_16sdp"
+            android:paddingEnd="@dimen/_16sdp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvSimilarContent" />
+            app:layout_constraintTop_toBottomOf="@id/clMovieContent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSimilarContent"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_20sdp"
+                android:text="@string/similar_content"
+                android:textColor="@color/textBlack"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSimilarMovieList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvSimilarContent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

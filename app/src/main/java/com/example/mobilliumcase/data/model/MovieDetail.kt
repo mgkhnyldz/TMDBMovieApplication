@@ -30,5 +30,9 @@ data class MovieDetail(
     @SerialName("runtime")
     val runtime: Int? = 0,
     @SerialName("tagline")
-    val tagline: String? = ""
+    val tagline: String? = "",
+    @SerialName("imdb_id")
+    val imdbId: String? = ""
+
+
 )
