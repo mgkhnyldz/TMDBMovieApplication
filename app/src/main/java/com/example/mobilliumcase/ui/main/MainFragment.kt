@@ -131,6 +131,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
         binding.rvMovieList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if(dy > 1){
+                    i { "scrolling" }
                     val layoutManager = binding.rvMovieList.layoutManager as LinearLayoutManager
                     val totalItemCount = layoutManager.itemCount
                     val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
@@ -148,6 +149,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
                 }
             }
         })
+
+        binding.mainNestedScroll.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+
+        }
     }
 
     override fun onClicked(movie: MovieResult) {
