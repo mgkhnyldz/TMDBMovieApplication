@@ -15,6 +15,7 @@ import com.example.mobilliumcase.data.resource.Status
 import com.example.mobilliumcase.databinding.FragmentMainBinding
 import com.example.mobilliumcase.extension.navigateSafe
 import com.example.mobilliumcase.helper.movieQueryMap
+import com.example.mobilliumcase.listener.OnItemMovieClickListener
 import com.example.mobilliumcase.ui.main.adapter.MovieAdapter
 import com.example.mobilliumcase.ui.main.adapter.SliderAdapter
 import com.github.ajalt.timberkt.e
@@ -22,7 +23,7 @@ import com.github.ajalt.timberkt.i
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), MovieAdapter.OnItemClickListener {
+class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), OnItemMovieClickListener {
 
     private val mainVM: MainVM by navGraphViewModels(R.id.nav_graph) {
         defaultViewModelProviderFactory
@@ -89,7 +90,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
         ).observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
-                    sliderAdapter = SliderAdapter(requireContext(), it.data!!.results.subList(0, 5))
+                    sliderAdapter = SliderAdapter(requireContext(), it.data!!.results.subList(0, 5), this)
                     binding.vpMovie.adapter = sliderAdapter
 
                 }
@@ -123,7 +124,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main), 
     }
 
     override fun onClicked(movie: MovieResult) {
-        i { "movie -> $movie" }
         navigateSafe(R.id.action_mainFragment_to_detailFragment, bundleOf(BundleKeys.MOVIE to movie))
     }
 }

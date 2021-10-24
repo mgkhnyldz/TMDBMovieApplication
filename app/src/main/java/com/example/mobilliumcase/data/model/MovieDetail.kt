@@ -15,10 +15,6 @@ data class MovieDetail(
     val backdropPath: String? = "",
     @SerialName("overview")
     val overview: String? = "",
-   /* @SerialName("genres")
-    val genres: List<Genre>? = listOf(),
-    @SerialName("credits")
-    val credits: Credits? = null,*/
     @SerialName("popularity")
     val popularity: Double? = 0.0,
     @SerialName("release_date")

@@ -4,6 +4,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.example.mobilliumcase.data.model.MovieDetail
 import com.example.mobilliumcase.data.model.MovieResult
 import com.example.mobilliumcase.util.Constants
 
@@ -31,6 +32,21 @@ fun setSearchText(textView: AppCompatTextView, movie: MovieResult) {
     } else {
         movie.title
     }
+}
+
+@BindingAdapter("detailText")
+fun setDetailText(textView: AppCompatTextView, movie: MovieDetail) {
+   /* if (!movie.releaseDate.isNullOrEmpty()) {
+        textView.text = if (movie.releaseDate.length > 3) {
+            val year = movie.releaseDate.subSequence(0, 4)
+            movie.title + " (" + year + ")"
+        } else {
+            movie.title
+        }
+    } else {
+        textView.text = movie.title
+    }*/
+    textView.text = movie.title
 }
 
 @BindingAdapter("releaseDate")

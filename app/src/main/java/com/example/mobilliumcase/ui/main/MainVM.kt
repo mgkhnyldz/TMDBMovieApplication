@@ -22,7 +22,6 @@ class MainVM @Inject constructor(
         viewModelScope.launch {
             tmdbRepository.getUpcomingMovies(map).collect {
                 _movieList.postValue(it)
-                i { "hobaa $it" }
             }
         }
     }

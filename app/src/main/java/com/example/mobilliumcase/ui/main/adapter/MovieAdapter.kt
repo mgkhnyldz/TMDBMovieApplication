@@ -2,21 +2,20 @@ package com.example.mobilliumcase.ui.main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobilliumcase.data.model.MovieResult
 import com.example.mobilliumcase.databinding.ItemMovieListBinding
-import com.github.ajalt.timberkt.i
+import com.example.mobilliumcase.listener.OnItemMovieClickListener
 
 class MovieAdapter(
     private val data: ArrayList<MovieResult>,
-    val itemClickListener: OnItemClickListener
+    val itemClickListener: OnItemMovieClickListener
 ) : RecyclerView.Adapter<MovieAdapter.MovieVH>() {
 
     class MovieVH(val binding: ItemMovieListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindTo(movie: MovieResult, clickListener: OnItemClickListener) {
+        fun bindTo(movie: MovieResult, clickListener: OnItemMovieClickListener) {
             binding.movie = movie
             binding.root.setOnClickListener {
                 clickListener.onClicked(movie)
@@ -39,9 +38,5 @@ class MovieAdapter(
     fun updateList(list: List<MovieResult>) {
         data.addAll(list)
         notifyItemRangeChanged(itemCount, list.size)
-    }
-
-    interface OnItemClickListener {
-        fun onClicked(movie: MovieResult)
     }
 }

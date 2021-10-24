@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
 import com.example.mobilliumcase.data.model.MovieResult
 import com.example.mobilliumcase.databinding.ItemSlideBinding
+import com.example.mobilliumcase.listener.OnItemMovieClickListener
 
 class SliderAdapter(
     private val context: Context,
-    var data: List<MovieResult>
+    var data: List<MovieResult>,
+    private val onItemMovieClickListener: OnItemMovieClickListener
 ) : PagerAdapter() {
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
@@ -21,6 +23,9 @@ class SliderAdapter(
         val inflater = LayoutInflater.from(context)
         val binding = ItemSlideBinding.inflate(inflater, collection, false)
         binding.movie = data[position]
+        binding.root.setOnClickListener {
+            onItemMovieClickListener.onClicked(data[position])
+        }
         collection.addView(binding.root)
         return binding.root
     }

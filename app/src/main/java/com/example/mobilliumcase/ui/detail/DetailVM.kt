@@ -1,6 +1,5 @@
 package com.example.mobilliumcase.ui.detail
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.mobilliumcase.repository.TmdbRepository
@@ -13,4 +12,8 @@ class DetailVM @Inject constructor(
 ) : ViewModel() {
 
     fun getMovieDetail(movieId: Long) = tmdbRepository.getMovieDetail(movieId).asLiveData()
+
+    fun getSimilarMovies(movieId: Long) = tmdbRepository.getSimilarMovies(movieId).asLiveData()
+
+
 }

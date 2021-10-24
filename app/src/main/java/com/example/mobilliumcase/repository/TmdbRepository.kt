@@ -65,4 +65,16 @@ class TmdbRepository @Inject constructor(
             emit(Resource.error(it.message, null, it))
         }.flowOn(Dispatchers.IO)
     }
+
+    fun getSimilarMovies(movieId: Long): Flow<Resource<Content>> {
+        return flow {
+            emit(Resource.loading(null))
+            val movieDetail = api.getSimilarMovies(
+                movieId = movieId
+            )
+            emit(Resource.success(movieDetail))
+        }.catch {
+            emit(Resource.error(it.message, null, it))
+        }.flowOn(Dispatchers.IO)
+    }
 }
